@@ -5,18 +5,18 @@ import lombok.Data;
 @Data
 public class Employee {
 	
+	private Long id;
+	private String name;
+	
 	private Employee() {
-		
+		super();
 	}
 		
-	public Employee(Long productID, String name) {		
-		this.productID = productID;
+	public Employee(Long id, String name) {		
+		this.id = id;
 		this.name = name;
 	}
 
 
-
-	private Long productID;
-	private String name;
 
 }
