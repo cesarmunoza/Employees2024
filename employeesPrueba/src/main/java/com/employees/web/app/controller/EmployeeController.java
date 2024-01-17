@@ -7,39 +7,31 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.employees.web.app.model.Employee;
 import com.employees.web.app.service.EmployeeService;
 
 @Controller
-@RequestMapping("app")
 public class EmployeeController {
 	
 	@Autowired
 	EmployeeService employeeService;
 	
-	@GetMapping("")
-	List<Employee> getEmployees(){
-		return employeeService.getEmployees();
-	}
+//	@GetMapping("")
+//	List<Employee> getEmployees(){
+//		return employeeService.getEmployees();
+//	}
+//	
+//	@GetMapping("/{id}")
+//	public Employee getEmployee(@PathVariable("id") Long id) {
+//		return employeeService.getEmployeeById(id);
+//	}
+		
 	
-	@GetMapping("/{id}")
-	public Employee getEmployee(@PathVariable("id") Long id) {
-		return employeeService.getEmployeeById(id);
-	}
-	
-	
-	
-	
-	
-	//Esto es para hacerlo en la vista
-	
-	
-	@GetMapping({"/index","","/"})
+	@GetMapping({"/index","","/", "/home"})
 	public String index(Model model) {
 		model.addAttribute("titulo", "App for managing employees");
-		return "index";
+		return "home";
 	}
 	
 	@GetMapping("/employee/{id}")
