@@ -47,12 +47,16 @@ public class EmployeeController {
 	            model.addAttribute("employee", employee);
 	            model.addAttribute("annualSalary", employeeSalary.calculateAnualSalary(employee.getEmployee_salary()));
 	            return "employee-details";
+	        }else {
+	            model.addAttribute("titulo", "Employee not found");
 	        }
+	    } else {
+	        // Si el campo de texto está vacío, devuelve la lista completa de empleados
+	        List<Employee> employees = employeeService.getAllEmployees();
+	        model.addAttribute("titulo", "Employee List");
+	        model.addAttribute("employees", employees);
 	    }
 
-	    model.addAttribute("titulo", "Employee not found");
-	    model.addAttribute("employee", null);
-	    model.addAttribute("annualSalary", null);
 	    return "employee-details";
 	}
 

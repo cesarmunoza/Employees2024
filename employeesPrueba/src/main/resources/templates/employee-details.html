@@ -35,10 +35,10 @@
 		<h1 class="text-secondary" th:text="${titulo}"></h1>
 
 		<!-- 		Formulario para ingresar el ID del empleado -->
-		<form th:action="@{/employee-details}" method="get">
+		<form th:action="@{/employee-details}" th:object="${employeeSearchForm}" method="get">
 			<div class="mb-3">
-				<label for="employeeId" class="form-label">Enter Employee
-					ID:</label> <input type="text" class="form-control" id="employeeId"
+				<label for="employeeId" class="form-label">Enter Employee ID:</label>
+				<input type="text" class="form-control" id="employeeId"
 					name="id" placeholder="Enter ID">
 			</div>
 			<button type="submit" class="btn btn-primary">Search</button>
@@ -67,8 +67,8 @@
 		</p>
 	</div>
 	
-	 <!-- Mostrar lista completa de empleados -->
-    <table th:if="${employee == null}">
+	<!-- Mostrar lista completa de empleados si el cuadro de texto está vacío -->
+    <table class="table table-striped" th:if="${employees != null and not employees.isEmpty()}">
         <thead>
             <tr>
                 <th>ID</th>
@@ -76,17 +76,15 @@
                 <th>Salary</th>
                 <th>Age</th>
                 <th>Profile Image</th>
-                <th>Annual Salary</th>
             </tr>
         </thead>
         <tbody>
-            <tr th:each="emp : ${employeeList}">
+            <tr th:each="emp: ${employees}">
                 <td th:text="${emp.id}"></td>
                 <td th:text="${emp.employee_name}"></td>
                 <td th:text="${emp.employee_salary}"></td>
                 <td th:text="${emp.employee_age}"></td>
                 <td th:text="${emp.profile_image}"></td>
-                <td th:text="${employeeSalary.calculateAnualSalary(emp.employee_salary)}"></td>
             </tr>
         </tbody>
     </table>
