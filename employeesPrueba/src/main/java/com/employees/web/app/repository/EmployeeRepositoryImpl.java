@@ -5,8 +5,8 @@ import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestClientException;
@@ -31,7 +31,9 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     @Autowired
     private ObjectMapper objectMapper;
 
-    private final String baseUrl = "http://dummy.restapiexample.com/api/v1/";
+//    private final String baseUrl = "http://dummy.restapiexample.com/api/v1/";
+    @Value("${employee.api.url}")
+    private String baseUrl;
 
     @Override
     public List<Employee> getAllEmployees() {
