@@ -12,11 +12,11 @@ import com.employees.web.app.model.Employee;
 public class EmployeeServiceImpl implements EmployeeService {
 	
 	
-	public EmployeeServiceImpl() {
-		employees.add(new Employee(1L, "Cesar"));
-		employees.add(new Employee(2L, "Diana"));
-		employees.add(new Employee(3L, "Wilson"));
-	}
+//	public EmployeeServiceImpl() {
+//		employees.add(new Employee(1L, "Cesar"));
+//		employees.add(new Employee(2L, "Diana"));
+//		employees.add(new Employee(3L, "Wilson"));
+//	}
 
 	List<Employee> employees = new ArrayList<Employee>();
 	
