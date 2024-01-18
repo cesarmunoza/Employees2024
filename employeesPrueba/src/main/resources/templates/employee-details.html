@@ -37,9 +37,8 @@
 		<!-- 		Formulario para ingresar el ID del empleado -->
 		<form th:action="@{/employee-details}" th:object="${employeeSearchForm}" method="get">
 			<div class="mb-3">
-				<label for="employeeId" class="form-label">Enter Employee ID:</label>
-				<input type="text" class="form-control" id="employeeId"
-					name="id" placeholder="Enter ID">
+				 <label for="id" class="form-label">Employee ID:</label>
+    <input class="form-control" type="text" id="id" name="id" th:field="*{id}" />
 			</div>
 			<button type="submit" class="btn btn-primary">Search</button>
 		</form>
