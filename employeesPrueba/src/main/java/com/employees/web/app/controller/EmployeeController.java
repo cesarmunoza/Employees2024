@@ -30,7 +30,7 @@ public class EmployeeController {
 		return "home";
 	}
 	
-	@GetMapping("/list-employees")
+	@GetMapping("/employee-list")
 	public String getEmployees(Model model) {
 		List<Employee> employees = employeeService.getAllEmployees();		
 		model.addAttribute("titulo", "Employees list");		
