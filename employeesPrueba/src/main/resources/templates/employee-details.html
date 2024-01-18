@@ -10,7 +10,7 @@
 	crossorigin="anonymous">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+	<nav class="navbar navbar-expand-lg bg-body-tertiary">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="/">Employees app</a>
 			<button class="navbar-toggler" type="button"
@@ -23,10 +23,10 @@
 				<ul class="navbar-nav">
 					<li class="nav-item"><a class="nav-link active"
 						aria-current="page" href="/">Home</a></li>
-					<li class="nav-item"><a class="nav-link" th:href="@{/employee-list}">Employees List</a>
-					</li>
-					<li class="nav-item"><a class="nav-link" th:href="@{/employee-details}">Employee details</a>
-					</li>					
+					<li class="nav-item"><a class="nav-link"
+						th:href="@{/employee-list}">Employees List</a></li>
+					<li class="nav-item"><a class="nav-link"
+						th:href="@{/employee-details}">Employee details</a></li>
 				</ul>
 			</div>
 		</div>
@@ -34,26 +34,85 @@
 	<div class="container">
 		<h1 class="text-secondary" th:text="${titulo}"></h1>
 
-		<p th:if="${employee != null}" th:text="'ID: ' + ${employee.id + ', Name: ' + ${employee.employee_name}}"></p>
-		<p th:if="${employee != null}" th:text="'Salary: ' + ${employee.employee_salary}"></p>
-		<p th:if="${employee != null}" th:text="'Age: ' + ${employee.employee_age}"></p>
-		<p th:if="${employee != null}" th:text="'Profile image' + ${employee.profile_image}"></p>
-		<p th:if="${annualSalary != null}" th:text="'Annual salary' + ${annualSalary}"></p>
+		<!-- 		Formulario para ingresar el ID del empleado -->
+		<form th:action="@{/employee-details}" method="get">
+			<div class="mb-3">
+				<label for="employeeId" class="form-label">Enter Employee
+					ID:</label> <input type="text" class="form-control" id="employeeId"
+					name="id" placeholder="Enter ID">
+			</div>
+			<button type="submit" class="btn btn-primary">Search</button>
+		</form>
 		
+	<!-- Mostrar detalles del empleado si existe -->
+	<div th:if="${employee != null}">
+		<h2 th:text="${employee.employee_name}"></h2>
+		<p>
+			ID: <span th:text="${employee.id}"></span>
+		</p>
+		<p>
+			Name: <span th:text="${employee.employee_name}"></span>
+		</p>
+		<p>
+			Salary: <span th:text="${employee.employee_salary}"></span>
+		</p>
+		<p>
+			Age: <span th:text="${employee.employee_age}"></span>
+		</p>
+		<p>
+			Profile Image: <span th:text="${employee.profile_image}"></span>
+		</p>
+		<p>
+			Annual Salary: <span th:text="${annualSalary}"></span>
+		</p>
+	</div>
+	
+	 <!-- Mostrar lista completa de empleados -->
+    <table th:if="${employee == null}">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Salary</th>
+                <th>Age</th>
+                <th>Profile Image</th>
+                <th>Annual Salary</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="emp : ${employeeList}">
+                <td th:text="${emp.id}"></td>
+                <td th:text="${emp.employee_name}"></td>
+                <td th:text="${emp.employee_salary}"></td>
+                <td th:text="${emp.employee_age}"></td>
+                <td th:text="${emp.profile_image}"></td>
+                <td th:text="${employeeSalary.calculateAnualSalary(emp.employee_salary)}"></td>
+            </tr>
+        </tbody>
+    </table>
+	
+	
+</div>
+</body>
+		</html>
 
-		
+
+
+
+
+
 	</div>
 	<script
-			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-			integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-			crossorigin="anonymous"></script>
-		<script
-			src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-			integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-			crossorigin="anonymous"></script>
-		<script
-			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-			integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
-			crossorigin="anonymous"></script>
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+		integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+		integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+		crossorigin="anonymous"></script>
 </body>
 </html>
