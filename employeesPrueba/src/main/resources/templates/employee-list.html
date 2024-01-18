@@ -41,14 +41,20 @@
 	<table class="table table-striped" th:if="${!employees.isEmpty()}">
 		<thead>
 			<tr>
-				<th>id</th>
-				<th>Nombre</th>
+				<th>ID</th>
+				<th>Name</th>
+				<th>Salary</th>
+				<th>Age</th>
+				<th>Profile image</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr th:each="employee:${employees}">
 				<td th:text="${employee.id}"></td>
-				<td th:text="${employee.name}"></td>
+				<td th:text="${employee.employee_name}"></td>
+				<td th:text="${employee.employee_salary}"></td>
+				<td th:text="${employee.employee_age}"></td>
+				<td th:text="${employee.profile_image}"></td>
 			</tr>
 		</tbody>
 	</table>

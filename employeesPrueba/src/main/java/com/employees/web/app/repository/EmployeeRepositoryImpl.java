@@ -4,10 +4,12 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 
 import com.employees.web.app.model.Employee;
 
+@Repository
 public class EmployeeRepositoryImpl implements EmployeeRepository {
 	
 	private final RestTemplate restTemplate;

@@ -9,29 +9,33 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.employees.web.app.model.Employee;
+import com.employees.web.app.service.EmployeeSalary;
 import com.employees.web.app.service.EmployeeService;
 
 @Controller
 public class EmployeeController {
+		
+	private final EmployeeService employeeService;
+	private final EmployeeSalary employeeSalary;
 	
 	@Autowired
-	EmployeeService employeeService;
-	
-//	@GetMapping("")
-//	List<Employee> getEmployees(){
-//		return employeeService.getEmployees();
-//	}
-//	
-//	@GetMapping("/{id}")
-//	public Employee getEmployee(@PathVariable("id") Long id) {
-//		return employeeService.getEmployeeById(id);
-//	}
-		
-	
+	public EmployeeController(EmployeeService employeeService, EmployeeSalary employeeSalary) {		
+		this.employeeService = employeeService;
+		this.employeeSalary = employeeSalary;
+	}
+
 	@GetMapping({"/index","","/", "/home"})
 	public String index(Model model) {
 		model.addAttribute("titulo", "App for managing employees");
 		return "home";
+	}
+	
+	@GetMapping("/list-employees")
+	public String getEmployees(Model model) {
+		List<Employee> employees = employeeService.getAllEmployees();		
+		model.addAttribute("titulo", "Employees list");		
+		model.addAttribute("employees", employees);
+		return "employee-list";
 	}
 	
 	@GetMapping("/employee/{id}")
@@ -39,18 +43,12 @@ public class EmployeeController {
 		Employee employee = employeeService.getEmployeeById(id);
 		model.addAttribute("titulo", "Employee details");
 		model.addAttribute("employee", employee);
+		model.addAttribute("annualSalary", employeeSalary.calculateAnualSalary(employee.getEmployee_salary()));
 		return "employee-details";
 	}
 	
 	
-	@GetMapping("/listar")
-	public String listar(Model model) {
-		List<Employee> employees = employeeService.getEmployees();
-		
-		model.addAttribute("titulo", "Employees list");		
-		model.addAttribute("employees", employees);
-		return "listar";
-	}
+	
 	
 
 
