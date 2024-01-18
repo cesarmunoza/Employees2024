@@ -7,6 +7,6 @@ import com.employees.web.app.model.Employee;
 public interface EmployeeService {
 	
 	Employee getEmployeeById(Long id);
-	List<Employee> getEmployees();
+	List<Employee> getAllEmployees();
 
 }
